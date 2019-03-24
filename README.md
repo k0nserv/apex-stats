@@ -14,6 +14,19 @@ A small tool to log match results in [Apex Legends](https://www.ea.com/en-gb/gam
 1. Press `win + r`, type cmd, and hit enter.
 2. Type `apex-stats` and fill in the values. If you make a mistake press `ctrl + c` to abort.
 
+**Example entry:**
+
+```
+Number of kills: 3
+Damage dealt: 1337
+Squad Position: 1
+Legend: Wraith
+Squad makeup: trio
+Notes: Hey we won one!
+```
+
+> For squad makeup the values `solo`, `duo`, and `trio` are supported.
+
 
 The log file is a CSV located in `%AppData%\Roaming\apex-stats\data\log.csv`.
 
