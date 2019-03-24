@@ -36,6 +36,12 @@ The log file is a CSV located in `%AppData%\Roaming\apex-stats\data\log.csv`.
 2. On the `Data` sheet use `File > Import` to import the log. Select `Replace current sheet`.
 
 
+
+### Example Analyiss
+
+Here are a few screenshots from my own stats.
+
+
 **Stats overview:**
 
 ![](img/master-stats.png)
