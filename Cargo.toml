@@ -1,0 +1,12 @@
+[package]
+name = "apex-stats"
+version = "0.1.0"
+authors = ["Hugo Tunius <h@tunius.se>"]
+edition = "2018"
+
+[dependencies]
+directories = "1.0.2"
+csv = "1"
+serde = { version = "1.0", features = ["derive"] }
+clap = "2"
+chrono = { version = "0.4", features = ["serde"] }
