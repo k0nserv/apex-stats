@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     backend.record(&observation)?;
 
     if observation.is_win() {
-        console.message("Congrats on the win 🙌\n");
+        console.message("Congrats on the win\n");
     } else if observation.is_top_three() {
         console.message("Top three, not too shabby\n");
     } else if observation.is_last() {
