@@ -28,7 +28,7 @@ Notes: Hey we won one!
 > For squad makeup the values `solo`, `duo`, and `trio` are supported.
 
 
-The log file is a CSV located in `%AppData%\Roaming\apex-stats\data\log.csv`.
+The log file is a CSV located in `%AppData%\apex-stats\data\log.csv`.
 
 ## Analysis
 
