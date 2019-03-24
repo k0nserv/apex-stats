@@ -14,7 +14,7 @@ pub enum Type {
 pub type Result<T> = result::Result<T, Box<Error>>;
 
 pub trait Backend {
-    fn record(&mut self, observation: Observation) -> Result<()>;
+    fn record(&mut self, observation: &Observation) -> Result<()>;
 }
 
 pub fn make_backend(kind: Type, config: &Config) -> Result<Box<Backend>> {

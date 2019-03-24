@@ -31,3 +31,17 @@ impl Serialize for Observation {
         state.end()
     }
 }
+
+impl Observation {
+    pub fn is_win(&self) -> bool {
+        self.squad_position == 1
+    }
+
+    pub fn is_top_three(&self) -> bool {
+        self.squad_position < 4
+    }
+
+    pub fn is_last(&self) -> bool {
+        self.squad_position >= 20
+    }
+}

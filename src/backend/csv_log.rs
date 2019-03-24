@@ -31,7 +31,7 @@ impl CSVLog {
 }
 
 impl Backend for CSVLog {
-    fn record(&mut self, observation: Observation) -> Result<()> {
+    fn record(&mut self, observation: &Observation) -> Result<()> {
         let record_file_exists = self.record_file_exists();
 
         let file = OpenOptions::new()
