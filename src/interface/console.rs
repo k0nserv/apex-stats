@@ -54,10 +54,10 @@ impl<'a> Interface for Console<'a> {
         Ok(Observation {
             number_of_kills,
             damage_dealt,
-            squad_position: squad_position,
-            legend: legend,
-            squad_type: squad_type,
-            notes: notes,
+            squad_position,
+            legend,
+            squad_type,
+            notes,
             at: (self.now)(),
         })
     }
