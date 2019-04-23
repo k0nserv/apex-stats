@@ -2,9 +2,9 @@ use std::error::Error;
 use std::fmt::{Display, Formatter};
 use std::str::FromStr;
 
-use serde::{Serialize, Serializer};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Serialize, PartialEq, Eq)]
+#[derive(Deserialize, Serialize, Debug, Hash, PartialEq, Eq)]
 pub enum Legend {
     Bangalore,
     Bloodhound,
@@ -78,11 +78,15 @@ impl Display for SquadTypeParseError {
 
 impl Error for SquadTypeParseError {}
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Deserialize, Serialize, Debug, Hash, PartialEq, Eq)]
 pub enum SquadType {
+    #[serde(rename = "solo")]
     Solo,
+    #[serde(rename = "duo")]
     Duo,
+    #[serde(rename = "trio")]
     Trio,
+    #[serde(rename = "unknown")]
     Unknown,
 }
 
@@ -95,20 +99,6 @@ impl FromStr for SquadType {
             "duo" => Ok(SquadType::Duo),
             "trio" => Ok(SquadType::Trio),
             _ => Err(SquadTypeParseError::new(s.to_owned())),
-        }
-    }
-}
-
-impl Serialize for SquadType {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        match self {
-            SquadType::Solo => serializer.serialize_str("solo"),
-            SquadType::Duo => serializer.serialize_str("duo"),
-            SquadType::Trio => serializer.serialize_str("trio"),
-            SquadType::Unknown => serializer.serialize_str("unknown"),
         }
     }
 }

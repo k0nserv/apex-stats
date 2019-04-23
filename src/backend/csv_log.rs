@@ -47,4 +47,11 @@ impl Backend for CSVLog {
 
         Ok(())
     }
+
+    fn all_records<'a>(&'a self) -> Result<Box<dyn Iterator<Item = Observation> + 'a>> {
+        let reader = csv::Reader::from_path(&self.path)?;
+        let result = reader.into_deserialize().flat_map(|x| x.ok());
+
+        Ok(Box::new(result))
+    }
 }

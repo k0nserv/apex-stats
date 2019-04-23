@@ -15,6 +15,7 @@ pub type Result<T> = result::Result<T, Box<Error>>;
 
 pub trait Backend {
     fn record(&mut self, observation: &Observation) -> Result<()>;
+    fn all_records<'a>(&'a self) -> Result<Box<dyn Iterator<Item = Observation> + 'a>>;
 }
 
 pub fn make_backend(kind: Type, config: &Config) -> Result<Box<Backend>> {

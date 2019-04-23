@@ -1,35 +1,29 @@
 use chrono::{DateTime, Local};
-use serde::ser::{Serialize, SerializeStruct, Serializer};
 
 use crate::apex::{Legend, SquadType};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct Observation {
+    #[serde(rename = "Kills")]
     pub number_of_kills: u64,
-    pub damage_dealt: u64,
-    pub squad_position: u64,
-    pub legend: Legend,
-    pub squad_type: SquadType,
-    pub notes: String,
-    pub at: DateTime<Local>,
-}
 
-impl Serialize for Observation {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        // 3 is the number of fields in the struct.
-        let mut state = serializer.serialize_struct("Observation", 7)?;
-        state.serialize_field("Kills", &self.number_of_kills)?;
-        state.serialize_field("Damage", &self.damage_dealt)?;
-        state.serialize_field("Squad Position", &self.squad_position)?;
-        state.serialize_field("Legend", &self.legend)?;
-        state.serialize_field("Time", &self.at)?;
-        state.serialize_field("Sqaud Makeup", &self.squad_type)?;
-        state.serialize_field("Notes", &self.notes)?;
-        state.end()
-    }
+    #[serde(rename = "Damage")]
+    pub damage_dealt: u64,
+
+    #[serde(rename = "Squad Position")]
+    pub squad_position: u64,
+
+    #[serde(rename = "Legend")]
+    pub legend: Legend,
+
+    #[serde(rename = "Time")]
+    pub at: DateTime<Local>,
+
+    #[serde(rename = "Squad Makeup")]
+    pub squad_type: SquadType,
+
+    #[serde(rename = "Notes")]
+    pub notes: String,
 }
 
 impl Observation {

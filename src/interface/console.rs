@@ -70,10 +70,10 @@ impl<'a> Interface for Console<'a> {
 
 #[cfg(test)]
 mod test {
+    use chrono::{Local, TimeZone};
     use std::cell::RefCell;
     use std::io::prelude::*;
     use std::rc::Rc;
-    use std::time::SystemTime;
 
     use super::test_support::{make_test_console, WriteStorage};
     use super::{Console, Interface, Legend, Observation, SquadType};
@@ -81,7 +81,7 @@ mod test {
     #[test]
     fn test_message() {
         // Arrange
-        let (mut console, storage) = make_test_console(None, &|| SystemTime::UNIX_EPOCH);
+        let (mut console, storage) = make_test_console(None, &|| Local.timestamp(0, 0));
 
         // Act
         console.message("Hello World");
@@ -106,7 +106,7 @@ mod test {
                 "trio".to_string(),                          // Squad Type
                 "Last guy died outside ring :D".to_string(), // Notes
             ]),
-            &|| SystemTime::UNIX_EPOCH,
+            &|| Local.timestamp(0, 0),
         );
 
         // Act
@@ -120,7 +120,7 @@ mod test {
             legend: Legend::Wraith,
             squad_type: SquadType::Trio,
             notes: String::from("Last guy died outside ring :D"),
-            at: SystemTime::UNIX_EPOCH,
+            at: Local.timestamp(0, 0),
         };
 
         assert_eq!(
@@ -145,7 +145,7 @@ mod test {
                 "trio".to_string(),                          // Squad Type
                 "Last guy died outside ring :D".to_string(), // Notes
             ]),
-            &|| SystemTime::UNIX_EPOCH,
+            &|| Local.timestamp(0, 0),
         );
 
         // Act
@@ -159,7 +159,7 @@ mod test {
             legend: Legend::Wraith,
             squad_type: SquadType::Trio,
             notes: String::from("Last guy died outside ring :D"),
-            at: SystemTime::UNIX_EPOCH,
+            at: Local.timestamp(0, 0),
         };
 
         assert_eq!(
@@ -174,7 +174,8 @@ mod test_support {
     use std::cell::RefCell;
     use std::io::prelude::*;
     use std::rc::Rc;
-    use std::time::SystemTime;
+
+    use chrono::{DateTime, Local};
 
     use super::{Console, LineReader};
 
@@ -235,7 +236,7 @@ mod test_support {
         now: &F,
     ) -> (Console, Rc<RefCell<WriteStorage>>)
     where
-        F: Fn() -> SystemTime,
+        F: Fn() -> DateTime<Local>,
     {
         let mock_writer = MockWriter::new();
         let mock_reader = MockReader::new(reader_inputs.unwrap_or(vec![]));

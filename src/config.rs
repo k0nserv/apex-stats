@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 extern crate directories;
 use directories::ProjectDirs;
 
-trait Directories {
+pub trait Directories {
     fn data_dir(&self) -> &Path;
 }
 
@@ -21,6 +21,10 @@ pub struct Config {
 impl Config {
     fn new(directories: Box<Directories>) -> Self {
         Self { directories }
+    }
+
+    pub fn data_dir(&self) -> &Path {
+        self.directories.data_dir()
     }
 
     pub fn data_path(&self) -> PathBuf {
